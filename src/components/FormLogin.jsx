@@ -1,80 +1,71 @@
 import bgLogin from "../assets/bg-login.jpg";
 import Logo from "../assets/logo.png";
-import eyeIcon from "../assets/eye-icon.png";
-import googleIcon from "../assets/29911481.png";
+import AuthHeader from "./auth/AuthHeader";
+import SSOButton from "./auth/SSOButton";
+import ButtonPrimary from "./auth/ButtonPrimary";
+import Input from "./auth/Input";
+import HideButton from "./auth/HideButton";
+import { Link } from "react-router-dom";
 
 const FormLogin = () => {
   return (
-    <>
-      <div
-        className="bg-cover bg-center min-h-screen p-40"
-        style={{ backgroundImage: `url(${bgLogin})` }}
-      >
-        <div className="bg-[#181A1CD6] w-full max-w-[529px] min-h-[663px] mx-auto px-10 py-10">
-          <div className="justify-items-center">
-            <img src={Logo} width={163} height={44} alt="Login Background" />
+    <div
+      className="min-h-dvh bg-cover bg-center px-4 py-6 sm:px-6 sm:py-8 md:px-10 lg:px-16"
+      style={{ backgroundImage: `url(${bgLogin})` }}
+    >
+      <div className="flex min-h-[calc(100dvh-48px)] items-center justify-center sm:min-h-[calc(100dvh-64px)]">
+        <div className="w-full max-w-[529px] bg-[#181A1CD6] px-5 py-7 sm:px-8 sm:py-9 md:px-10 md:py-10">
+          <div className="flex justify-center">
+            <img
+              src={Logo}
+              className="h-auto w-[116px] sm:w-[145px] md:w-[163px]"
+              alt="Logo Chill"
+            />
           </div>
-          <div className="justify-items-center mt-10">
-            <h1 className="font-['Lato'] font-bold text-[#FFFFFF] text-[32px] ">
-              Masuk
-            </h1>
-            <h1 className="font-['Lato'] font-[400] text-[#FFFFFF] text-[16px] ">
-              Selamat datang kembali!
-            </h1>
-          </div>
-          <div className="mt-8">
+          <AuthHeader title="Masuk" subtitle="Selamat datang kembali!" />
+          <div className="mt-6 sm:mt-8">
             <label
               htmlFor="username"
-              className="text-white font-[500] text-[18px]"
+              className="text-[16px] font-[500] text-white sm:text-[18px]"
             >
               Username
             </label>
-            <input
+            <Input
               type="text"
-              className="w-full h-13 border-1 border-[#505057] rounded-[24px] mt-2 mb-4 px-4 placeholder:text-[#C1C2C4] focus:text-white text-white"
               placeholder="Masukkan username"
               name="username"
             />
+
             <label
               htmlFor="password"
-              className="text-white font-[500] text-[18px]"
+              className="text-[16px] font-[500] text-white sm:text-[18px]"
             >
               Kata Sandi
             </label>
             <div className="relative">
-              <input
+              <Input
                 type="password"
-                className="w-full h-13 border-1 border-[#505057] rounded-[24px] mt-2 mb-4 px-4 placeholder:text-[#C1C2C4] focus:text-white text-white"
                 placeholder="Masukkan password"
                 name="password"
               />
-              <button
-                type="button"
-                className="absolute right-4 top-[45%] -translate-y-1/2"
-              >
-                <img src={eyeIcon} />
-              </button>
+              <HideButton />
             </div>
-            <div className="flex justify-between text-[16px] text-[#C1C2C4]">
+            <div className="text-[12px] flex gap-2 sm:text-[14px] text-[#C1C2C4] justify-between">
               <span>
                 Belum punya akun?{" "}
-                <span className="text-white font-bold">Daftar</span>
+                <span className="text-white font-bold"><Link to="/register">Daftar</Link></span>
               </span>
-              <span className="text-white">Lupa kata sandi?</span>
+              <span className="text-white text-end">Lupa kata sandi?</span>
             </div>
-            <div className="flex flex-col text-white text-center mt-10 gap-1">
-              <button className="w-full h-13 bg-[#E7E3FC3B] rounded-[24px] font-[600] text-[16px]">
-                Masuk
-              </button>
+            <div className="mt-8 flex flex-col gap-1 text-center text-white sm:mt-10">
+              <ButtonPrimary text="Masuk" />
               <span className="text-[14px] text-[#9D9EA1]">Atau</span>
-              <button className="w-full h-13 rounded-[24px] font-[600] text-[16px] border-1 border-[#44454c] flex items-center justify-center gap-4">
-                <img src={googleIcon} alt="Google Icon" width={18} height={18} /> Masuk dengan Google
-              </button>
+              <SSOButton text="Masuk dengan Google" />
             </div>
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 
