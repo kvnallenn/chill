@@ -1,4 +1,4 @@
-import Logo from "../assets/Logo.png";
+import Logo from "../assets/logo.png";
 import VectorLogo from "../assets/Vector.png";
 import profileImage from "../assets/Ellipse 395.png";
 
