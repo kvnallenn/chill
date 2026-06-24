@@ -1,7 +1,9 @@
 import { useEffect, useState } from "react";
 import { NIL as NIL_UUID } from "uuid";
+import dotenv from "dotenv";
+import axios from "axios";
 
-const MyList = ({ data, fetchData }) => {
+const MyList = ({ data, fetchData, API }) => {
   const [editingId, setEditingId] = useState(null);
   const [editTitle, setEditTitle] = useState("");
   const [loading, setLoading] = useState(null);
@@ -12,18 +14,9 @@ const MyList = ({ data, fetchData }) => {
   };
 
   const handleUpdate = async (id) => {
-    await fetch(
-      `https://6a26cd48a84f9d39e907e9c4.mockapi.io/api/v1/favorites/${id}`,
-      {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          title: editTitle,
-        }),
-      },
-    );
+    await axios.put(`${API}/${id}`, {
+      title: editTitle,
+    });
 
     await fetchData();
 
@@ -32,27 +25,15 @@ const MyList = ({ data, fetchData }) => {
   };
 
   const sendData = async () => {
-    const response = await fetch(
-      "https://6a26cd48a84f9d39e907e9c4.mockapi.io/api/v1/favorites",
-      {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(container),
-      },
-    );
-    const result = await response.json();
+    await axios.post(API, container);
     await fetchData();
   };
 
   const handleDelete = async (id) => {
     try {
       setLoading(id);
-      const response = await fetch(
-        `https://6a26cd48a84f9d39e907e9c4.mockapi.io/api/v1/favorites/${id}`,
-        {
-          method: "DELETE",
-        },
-      );
+
+      await axios.delete(`${API}/${id}`);
 
       await fetchData();
     } catch (error) {
