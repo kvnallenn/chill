@@ -9,9 +9,8 @@ const Container = () => {
   const [data, setData] = useState([]);
 
   const fetchData = async () => {
-    const { data } = await axios.get(BASE_API_URL);
-    console.log(data);
-    setData(data);
+    const res = await axios.get(BASE_API_URL);
+    setData(res.data);
   };
 
   useEffect(() => {
